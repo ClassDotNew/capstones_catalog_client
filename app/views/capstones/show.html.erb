@@ -1,2 +1,17 @@
-<h1>Show Page</h1>
+<div class="row">
+  <div class="col-sm-6 col-md-6" id=<%= @capstone.student_name.sub(" ", "").downcase %>>
+    <div class="thumbnail">
+      <img class="img-responsive" src=<%= @capstone.screenshot %> >
+        <div class="caption">
+          <h2><%= @capstone.name %></h2>
+          <h3>Created By: <%= @capstone.student_name %></h3>
+          <p>
+            Description: <%= @capstone.description %>
+          </p>
+          <a href=<%= @capstone.url %> class="btn btn-primary" role="button">View URL</a>
+          <a href=<%= "/capstone" %> class="btn btn-default" role="button">Back</a>
 
+      </div>
+    </div>
+  </div>
+</div>
