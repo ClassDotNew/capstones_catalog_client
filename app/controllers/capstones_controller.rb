@@ -1,9 +1,9 @@
 class CapstonesController < ApplicationController
   def index
-    @capstones = Capstone.all
+    # @capstones = Capstone.all
   end
 
   def show
-    @capstone = Capstone.find_by id: params[:id]
+    @capstone = Capstone.find params[:id]
   end
 end
