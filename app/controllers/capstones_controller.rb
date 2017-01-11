@@ -1,6 +1,7 @@
 class CapstonesController < ApplicationController
   def index
-    # @capstones = Capstone.all
+    @capstones = Capstone.all
+  	render 'index.html.erb'
   end
 
   def show
