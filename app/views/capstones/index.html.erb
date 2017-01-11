@@ -1,1 +1,18 @@
-<h1>Index Page</h1>
+<h1></h1>
+<% @capstones.each_slice(3) do |array| %>
+<div class="row">
+  <% array.each do |capstone| %>
+   <div class="col-md-4">
+     <div class="thumbnail">
+     <h2><%=capstone.name%></h2>
+     <img class="img-response" src= <%=capstone.screenshot %>>
+       <div class="caption">
+         <h4>Created By: <%=capstone.student_name%></h4>
+         <p><%=capstone.description %></p>
+         <p><a href= <%="/capstones/#{capstone.id}"%> class="btn btn-primary" role="button">View Details</a> </p>
+	    </div>
+	  </div>
+	</div>
+  <% end %>
+</div>
+<% end %>

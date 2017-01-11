@@ -1,9 +1,10 @@
 class CapstonesController < ApplicationController
   def index
     @capstones = Capstone.all
+  	render 'index.html.erb'
   end
 
   def show
-    @capstone = Capstone.find_by id: params[:id]
+    @capstone = Capstone.find params[:id]
   end
 end
