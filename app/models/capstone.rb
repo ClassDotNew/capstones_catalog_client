@@ -11,7 +11,8 @@ class Capstone
   #   URL
   #   Screenshot (Optional)
 
-  $base_url = "http://localhost:3010/api/v1/students"
+  $base_url = "http://localhost:3010/api/v1/students/"
+
   $header = {
     "Accept" => "application/json"
   }
@@ -32,27 +33,18 @@ class Capstone
   end
 
   def self.find(input_id)
-    # response_hash = Unirest.get(
-    #   $base_url + "#{input_id}",
-    #   headers: $header
-    #   ).body
-    # # unknow yet...
-    p input_id
-    response_hash = {
-      :id => 1,
-      :student_name => "Matthew Califano",
-      :name => "DJ Bookings",
-      :description => "A website that allows DJs and Venues workout a bidding war, cutting out the middle man.",
-      :url => "http://djbookings.matt",
-      :screenshot => "https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif"
-    }
+    response_hash = Unirest.get(
+      $base_url + "#{input_id}",
+      headers: $header
+      ).body
+    
     capstone = self.new(
       id: response_hash[:id],
-      student_name: response_hash[:student_name],
-      name: response_hash[:name],
-      description: response_hash[:description],
-      url: response_hash[:url],
-      screenshot: response_hash[:screenshot]
+      student_name: "#{response_hash["firstName"]} #{response_hash["lastName"]}",
+      name: response_hash["capstones"][0]["name"],
+      description: response_hash["capstones"][0]["description"],
+      url: response_hash["capstones"][0]["url"],
+      screenshot: response_hash["capstones"][0]["screenshot"]
       )
   end
 
@@ -62,7 +54,7 @@ class Capstone
       headers: $header
       ).body
     capstones = []
-   
+
     response_hash.each do |student|
       capstones << self.new(
         id: student["id"],
