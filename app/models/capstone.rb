@@ -11,7 +11,7 @@ class Capstone
   #   URL
   #   Screenshot (Optional)
 
-  $base_url = "http://localhost:3000/capstones/"
+  $base_url = "http://localhost:3010/api/v1/students"
   $header = {
     "Accept" => "application/json"
   }
@@ -57,62 +57,20 @@ class Capstone
   end
 
   def self.all
-    # response_hash = Unirest.get(
-    #   $base_url,
-    #   headers: $header
-    #   ).body
-    response_hash = [
-     {
-       :id => 1,
-       :student_name => "Matthew Califano",
-       :name => "DJ Bookings",
-       :description => "A website that allows DJs and Venues workout a bidding war, cutting out the middle man.",
-       :url => "http://djbookings.matt",
-       :screenshot => "https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif"
-     },
-     {
-       :id => 2,
-       :student_name => "Matt Cali",
-       :name => "Wedding Bookings",
-       :description => "A website that allows users to look and book different wedding options ",
-       :url => "http://weddingbooks.matt",
-       :screenshot => "https://media.giphy.com/media/145J2js80Afqwg/giphy.gif"
-     },
-     {
-       :id => 3,
-       :student_name => "Ray Cheng",
-       :name => "Climb On",
-       :description => "Climbing journal ",
-       :url => "http://climbon.ray",
-       :screenshot => "https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif"
-     },
-     {
-       :id => 4,
-       :student_name => "Raymond Chen",
-       :name => "Shoot On",
-       :description => "Shows a map of all the different indoor archery ranges in your area",
-       :url => "http://climbon.ray",
-       :screenshot => "https://media.giphy.com/media/145J2js80Afqwg/giphy.gif"
-     },
-     {
-       :id => 5,
-       :student_name => "Brian Rice",
-       :name => "Code On",
-       :description => "Coding journal  ",
-       :url => "http://codeon.brian",
-       :screenshot => "https://media.giphy.com/media/l4Jz3a8jO92crUlWM/giphy.gif"
-     }
-   ]
+    response_hash = Unirest.get(
+      $base_url,
+      headers: $header
+      ).body
     capstones = []
-    # unknown yet...
-    response_hash.each do |capstone|
+   
+    response_hash.each do |student|
       capstones << self.new(
-        id: capstone[:id],
-        student_name: capstone[:student_name],
-        name: capstone[:name],
-        description: capstone[:description],
-        url: capstone[:url],
-        screenshot: capstone[:screenshot]
+        id: student["id"],
+        student_name: "#{student["firstName"]} #{student["lastName"]}", 
+        name: student["capstones"][0]["name"],
+        description: student["capstones"][0]["description"],
+        url: student["capstones"][0]["url"],
+        screenshot: student["capstones"][0]["screenshot"],
         )
     end
     capstones
