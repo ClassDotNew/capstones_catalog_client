@@ -64,10 +64,10 @@ class Capstone
       capstones << self.new(
         id: student["id"],
         student_name: "#{student["firstName"]} #{student["lastName"]}" || "", 
-        name: student["capstones"][0]["name"] || "" ,
-        description: student["capstones"][0]["description"] || "",
-        url: student["capstones"][0]["url"] || "",
-        screenshot: student["capstones"][0]["screenshot"] || "",
+        name: student["capstones"][0].nil? ? "" : student["capstones"][0]["name"],
+        description: student["capstones"][0].nil? ? "" : student["capstones"][0]["description"],
+        url: student["capstones"][0].nil? ? "" : student["capstones"][0]["url"],
+        screenshot: student["capstones"][0].nil? ? "" : student["capstones"][0]["screenshot"],
         )
     end
     capstones
