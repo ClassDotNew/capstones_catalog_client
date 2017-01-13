@@ -38,6 +38,8 @@ class Capstone
       headers: $header
       ).body
     
+    @student = Unirest.get("http://localhost:3010/api/v1/stiudent/1", headers: {"Appcept" => "application/json"})
+
     capstone = self.new(
       id: response_hash[:id],
       student_name: "#{response_hash["firstName"]} #{response_hash["lastName"]}",
@@ -56,13 +58,16 @@ class Capstone
     capstones = []
 
     response_hash.each do |student|
+      p "*" * 50
+      p student
+      p "*" * 50
       capstones << self.new(
         id: student["id"],
-        student_name: "#{student["firstName"]} #{student["lastName"]}", 
-        name: student["capstones"][0]["name"],
-        description: student["capstones"][0]["description"],
-        url: student["capstones"][0]["url"],
-        screenshot: student["capstones"][0]["screenshot"],
+        student_name: "#{student["firstName"]} #{student["lastName"]}" || "", 
+        name: student["capstones"][0]["name"] || "" ,
+        description: student["capstones"][0]["description"] || "",
+        url: student["capstones"][0]["url"] || "",
+        screenshot: student["capstones"][0]["screenshot"] || "",
         )
     end
     capstones
