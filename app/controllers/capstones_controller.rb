@@ -7,4 +7,8 @@ class CapstonesController < ApplicationController
   def show
     @capstone = Capstone.find params[:id]
   end
+
+  def test
+    
+  end
 end
