@@ -11,7 +11,7 @@ class Capstone
   #   URL
   #   Screenshot (Optional)
 
-  $base_url = "http://localhost:3010/api/v1/students/"
+  $base_url = "https://protected-depths-54434.herokuapp.com/api/v1/students/"
 
   $header = {
     "Accept" => "application/json"
